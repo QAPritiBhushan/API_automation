@@ -1,0 +1,220 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<robot generator="Robot 5.0.1 (Python 3.9.1 on win32)" generated="20220713 12:11:24.849" rpa="false" schemaversion="3">
+<suite id="s1" name="API" source="C:\API_automation\TestCases\API_.robot">
+<test id="s1-t1" name="TC001_Post_Request_Fetch_Response_Validate_Status_Code using priti" line="15">
+<kw name="Mykeywork">
+<arg>priti</arg>
+<arg>jjj</arg>
+<kw name="Create Session" library="RequestsLibrary">
+<arg>API_Testing</arg>
+<arg>${API_Base_Endpoint}</arg>
+<arg>verify=true</arg>
+<doc>Create Session: create a HTTP session to a server</doc>
+<msg timestamp="20220713 12:11:26.359" level="INFO">Creating Session using : alias=API_Testing, url=https://reqres.in/, headers={},                     cookies={}, auth=None, timeout=None, proxies=None, verify=True,                     debug=0 </msg>
+<status status="PASS" starttime="20220713 12:11:26.359" endtime="20220713 12:11:26.359"/>
+</kw>
+<kw name="Create Dictionary" library="BuiltIn">
+<var>${body}</var>
+<arg>name=${First_Name}</arg>
+<arg>job =${job}</arg>
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<msg timestamp="20220713 12:11:26.360" level="INFO">${body} = {'name': 'priti', 'job ': 'jjj'}</msg>
+<status status="PASS" starttime="20220713 12:11:26.359" endtime="20220713 12:11:26.360"/>
+</kw>
+<kw name="Create Dictionary" library="BuiltIn">
+<var>${header}</var>
+<arg>Content-type=application/json,</arg>
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<msg timestamp="20220713 12:11:26.361" level="INFO">${header} = {'Content-type': 'application/json,'}</msg>
+<status status="PASS" starttime="20220713 12:11:26.360" endtime="20220713 12:11:26.361"/>
+</kw>
+<kw name="POST On Session" library="RequestsLibrary">
+<var>${response}</var>
+<arg>API_Testing</arg>
+<arg>api/users</arg>
+<arg>data=${body}</arg>
+<arg>headers=${header}</arg>
+<doc>Sends a POST request on a previously created HTTP Session.</doc>
+<msg timestamp="20220713 12:11:26.914" level="INFO">POST Request : url=https://reqres.in/api/users 
+ path_url=/api/users 
+ headers={'User-Agent': 'python-requests/2.27.1', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive', 'Content-type': 'application/json,', 'Content-Length': '19'} 
+ body=name=priti&amp;job+=jjj 
+ </msg>
+<msg timestamp="20220713 12:11:26.915" level="INFO">POST Response : url=https://reqres.in/api/users 
+ status=201, reason=Created 
+ headers={'Date': 'Wed, 13 Jul 2022 06:41:07 GMT', 'Content-Type': 'application/json; charset=utf-8', 'Content-Length': '51', 'Connection': 'keep-alive', 'X-Powered-By': 'Express', 'Access-Control-Allow-Origin': '*', 'Etag': 'W/"33-0KjFyyrtfTGz5Uyp76oCf4/Y18M"', 'Via': '1.1 vegur', 'CF-Cache-Status': 'DYNAMIC', 'Expect-CT': 'max-age=604800, report-uri="https://report-uri.cloudflare.com/cdn-cgi/beacon/expect-ct"', 'Report-To': '{"endpoints":[{"url":"https:\\/\\/a.nel.cloudflare.com\\/report\\/v3?s=Df6L7UR3wzq2IOjDjggVwnJxSkD%2BPxmjEdF3BExXvPmqBewuE9PIfer0F%2B6D1rT5Cz6AmQt7gh02lOreZR1oJjUwxfHApfwxrGXxzNxTVscmgcoAyVWQGou5CA%3D%3D"}],"group":"cf-nel","max_age":604800}', 'NEL': '{"success_fraction":0,"report_to":"cf-nel","max_age":604800}', 'Server': 'cloudflare', 'CF-RAY': '72a007f20cce7957-AMD'} 
+ body={"id":"198","createdAt":"2022-07-13T06:41:07.113Z"} 
+ </msg>
+<msg timestamp="20220713 12:11:26.915" level="INFO">${response} = &lt;Response [201]&gt;</msg>
+<status status="PASS" starttime="20220713 12:11:26.361" endtime="20220713 12:11:26.915"/>
+</kw>
+<kw name="Log To Console" library="BuiltIn">
+<arg>${response.status_code}</arg>
+<doc>Logs the given message to the console.</doc>
+<status status="PASS" starttime="20220713 12:11:26.915" endtime="20220713 12:11:26.916"/>
+</kw>
+<kw name="Convert To String" library="BuiltIn">
+<var>${status_code}</var>
+<arg>${response.status_code}</arg>
+<doc>Converts the given item to a Unicode string.</doc>
+<msg timestamp="20220713 12:11:26.918" level="INFO">${status_code} = 201</msg>
+<status status="PASS" starttime="20220713 12:11:26.917" endtime="20220713 12:11:26.918"/>
+</kw>
+<kw name="Should Be Equal" library="BuiltIn">
+<arg>${status_code}</arg>
+<arg>201</arg>
+<doc>Fails if the given objects are unequal.</doc>
+<status status="PASS" starttime="20220713 12:11:26.918" endtime="20220713 12:11:26.918"/>
+</kw>
+<kw name="Convert To String" library="BuiltIn">
+<var>${body}</var>
+<arg>${response.content}</arg>
+<doc>Converts the given item to a Unicode string.</doc>
+<msg timestamp="20220713 12:11:26.919" level="INFO">${body} = {"id":"198","createdAt":"2022-07-13T06:41:07.113Z"}</msg>
+<status status="PASS" starttime="20220713 12:11:26.919" endtime="20220713 12:11:26.919"/>
+</kw>
+<kw name="Log To Console" library="BuiltIn">
+<arg>${body}</arg>
+<doc>Logs the given message to the console.</doc>
+<status status="PASS" starttime="20220713 12:11:26.920" endtime="20220713 12:11:26.920"/>
+</kw>
+<kw name="Should Contain" library="BuiltIn">
+<arg>${body}</arg>
+<arg>createdAt</arg>
+<doc>Fails if ``container`` does not contain ``item`` one or more times.</doc>
+<status status="PASS" starttime="20220713 12:11:26.920" endtime="20220713 12:11:26.920"/>
+</kw>
+<kw name="Get From Dictionary" library="Collections">
+<var>${contentTypeValue}</var>
+<arg>${response.headers}</arg>
+<arg>content-type</arg>
+<doc>Returns a value from the given ``dictionary`` based on the given ``key``.</doc>
+<msg timestamp="20220713 12:11:26.921" level="INFO">${contentTypeValue} = application/json; charset=utf-8</msg>
+<status status="PASS" starttime="20220713 12:11:26.921" endtime="20220713 12:11:26.921"/>
+</kw>
+<kw name="Should Be Equal" library="BuiltIn">
+<arg>${contentTypeValue}</arg>
+<arg>application/json; charset=utf-8</arg>
+<doc>Fails if the given objects are unequal.</doc>
+<status status="PASS" starttime="20220713 12:11:26.922" endtime="20220713 12:11:26.922"/>
+</kw>
+<status status="PASS" starttime="20220713 12:11:26.358" endtime="20220713 12:11:26.922"/>
+</kw>
+<status status="PASS" starttime="20220713 12:11:26.356" endtime="20220713 12:11:26.923"/>
+</test>
+<test id="s1-t2" name="TC001_Post_Request_Fetch_Response_Validate_Status_Code using pratap" line="15">
+<kw name="Mykeywork">
+<arg>pratap</arg>
+<arg>ooo</arg>
+<kw name="Create Session" library="RequestsLibrary">
+<arg>API_Testing</arg>
+<arg>${API_Base_Endpoint}</arg>
+<arg>verify=true</arg>
+<doc>Create Session: create a HTTP session to a server</doc>
+<msg timestamp="20220713 12:11:26.928" level="INFO">Creating Session using : alias=API_Testing, url=https://reqres.in/, headers={},                     cookies={}, auth=None, timeout=None, proxies=None, verify=True,                     debug=0 </msg>
+<status status="PASS" starttime="20220713 12:11:26.928" endtime="20220713 12:11:26.929"/>
+</kw>
+<kw name="Create Dictionary" library="BuiltIn">
+<var>${body}</var>
+<arg>name=${First_Name}</arg>
+<arg>job =${job}</arg>
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<msg timestamp="20220713 12:11:26.929" level="INFO">${body} = {'name': 'pratap', 'job ': 'ooo'}</msg>
+<status status="PASS" starttime="20220713 12:11:26.929" endtime="20220713 12:11:26.929"/>
+</kw>
+<kw name="Create Dictionary" library="BuiltIn">
+<var>${header}</var>
+<arg>Content-type=application/json,</arg>
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<msg timestamp="20220713 12:11:26.930" level="INFO">${header} = {'Content-type': 'application/json,'}</msg>
+<status status="PASS" starttime="20220713 12:11:26.930" endtime="20220713 12:11:26.930"/>
+</kw>
+<kw name="POST On Session" library="RequestsLibrary">
+<var>${response}</var>
+<arg>API_Testing</arg>
+<arg>api/users</arg>
+<arg>data=${body}</arg>
+<arg>headers=${header}</arg>
+<doc>Sends a POST request on a previously created HTTP Session.</doc>
+<msg timestamp="20220713 12:11:27.331" level="INFO">POST Request : url=https://reqres.in/api/users 
+ path_url=/api/users 
+ headers={'User-Agent': 'python-requests/2.27.1', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive', 'Content-type': 'application/json,', 'Content-Length': '20'} 
+ body=name=pratap&amp;job+=ooo 
+ </msg>
+<msg timestamp="20220713 12:11:27.331" level="INFO">POST Response : url=https://reqres.in/api/users 
+ status=201, reason=Created 
+ headers={'Date': 'Wed, 13 Jul 2022 06:41:07 GMT', 'Content-Type': 'application/json; charset=utf-8', 'Content-Length': '51', 'Connection': 'keep-alive', 'X-Powered-By': 'Express', 'Access-Control-Allow-Origin': '*', 'Etag': 'W/"33-q9EeTAAEQKpPnoI+Bcs9EsdwDOw"', 'Via': '1.1 vegur', 'CF-Cache-Status': 'DYNAMIC', 'Expect-CT': 'max-age=604800, report-uri="https://report-uri.cloudflare.com/cdn-cgi/beacon/expect-ct"', 'Report-To': '{"endpoints":[{"url":"https:\\/\\/a.nel.cloudflare.com\\/report\\/v3?s=T603p22LGUSBYQnPYAo8%2B5bv7gl4kUGknbjFKiyEasdm1mSibbRErySGIlHQuS2%2FRoOmYN39rPqfqe3gNp5g6wXMahMUp45rpExAJNO%2FyA%2BAizmsdhkwRiAwuw%3D%3D"}],"group":"cf-nel","max_age":604800}', 'NEL': '{"success_fraction":0,"report_to":"cf-nel","max_age":604800}', 'Server': 'cloudflare', 'CF-RAY': '72a007f4ce96795c-AMD'} 
+ body={"id":"396","createdAt":"2022-07-13T06:41:07.550Z"} 
+ </msg>
+<msg timestamp="20220713 12:11:27.331" level="INFO">${response} = &lt;Response [201]&gt;</msg>
+<status status="PASS" starttime="20220713 12:11:26.930" endtime="20220713 12:11:27.331"/>
+</kw>
+<kw name="Log To Console" library="BuiltIn">
+<arg>${response.status_code}</arg>
+<doc>Logs the given message to the console.</doc>
+<status status="PASS" starttime="20220713 12:11:27.332" endtime="20220713 12:11:27.333"/>
+</kw>
+<kw name="Convert To String" library="BuiltIn">
+<var>${status_code}</var>
+<arg>${response.status_code}</arg>
+<doc>Converts the given item to a Unicode string.</doc>
+<msg timestamp="20220713 12:11:27.334" level="INFO">${status_code} = 201</msg>
+<status status="PASS" starttime="20220713 12:11:27.333" endtime="20220713 12:11:27.334"/>
+</kw>
+<kw name="Should Be Equal" library="BuiltIn">
+<arg>${status_code}</arg>
+<arg>201</arg>
+<doc>Fails if the given objects are unequal.</doc>
+<status status="PASS" starttime="20220713 12:11:27.334" endtime="20220713 12:11:27.335"/>
+</kw>
+<kw name="Convert To String" library="BuiltIn">
+<var>${body}</var>
+<arg>${response.content}</arg>
+<doc>Converts the given item to a Unicode string.</doc>
+<msg timestamp="20220713 12:11:27.336" level="INFO">${body} = {"id":"396","createdAt":"2022-07-13T06:41:07.550Z"}</msg>
+<status status="PASS" starttime="20220713 12:11:27.335" endtime="20220713 12:11:27.336"/>
+</kw>
+<kw name="Log To Console" library="BuiltIn">
+<arg>${body}</arg>
+<doc>Logs the given message to the console.</doc>
+<status status="PASS" starttime="20220713 12:11:27.336" endtime="20220713 12:11:27.336"/>
+</kw>
+<kw name="Should Contain" library="BuiltIn">
+<arg>${body}</arg>
+<arg>createdAt</arg>
+<doc>Fails if ``container`` does not contain ``item`` one or more times.</doc>
+<status status="PASS" starttime="20220713 12:11:27.336" endtime="20220713 12:11:27.337"/>
+</kw>
+<kw name="Get From Dictionary" library="Collections">
+<var>${contentTypeValue}</var>
+<arg>${response.headers}</arg>
+<arg>content-type</arg>
+<doc>Returns a value from the given ``dictionary`` based on the given ``key``.</doc>
+<msg timestamp="20220713 12:11:27.338" level="INFO">${contentTypeValue} = application/json; charset=utf-8</msg>
+<status status="PASS" starttime="20220713 12:11:27.337" endtime="20220713 12:11:27.338"/>
+</kw>
+<kw name="Should Be Equal" library="BuiltIn">
+<arg>${contentTypeValue}</arg>
+<arg>application/json; charset=utf-8</arg>
+<doc>Fails if the given objects are unequal.</doc>
+<status status="PASS" starttime="20220713 12:11:27.338" endtime="20220713 12:11:27.338"/>
+</kw>
+<status status="PASS" starttime="20220713 12:11:26.927" endtime="20220713 12:11:27.338"/>
+</kw>
+<status status="PASS" starttime="20220713 12:11:26.925" endtime="20220713 12:11:27.339"/>
+</test>
+<status status="PASS" starttime="20220713 12:11:24.853" endtime="20220713 12:11:27.341"/>
+</suite>
+<statistics>
+<total>
+<stat pass="2" fail="0" skip="0">All Tests</stat>
+</total>
+<tag>
+</tag>
+<suite>
+<stat pass="2" fail="0" skip="0" id="s1" name="API">API</stat>
+</suite>
+</statistics>
+<errors>
+</errors>
+</robot>
